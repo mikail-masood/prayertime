@@ -33,56 +33,197 @@ class _HomePageState extends State<HomePage> {
     return list;
   }
 
+  bool valueFajr = false;
+  bool valueDhuhr = false;
+  bool valueAsr = false;
+  bool valueMaghrib = false;
+  bool valueIsha = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('PrayTime'),
-          backgroundColor: Colors.blue,
-        ),
         body: FutureBuilder(
-          future: getPrayerTimeData(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              return Center(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: <Widget>[
-                              Text('Fajr'),
-                              Text('Dhuhr'),
-                              Text('Asr'),
-                              Text('Maghrib'),
-                              Text('Isha'),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: <Widget>[
-                              Text(snapshot.data.data.timings.fajr),
-                              Text(snapshot.data.data.timings.dhuhr),
-                              Text(snapshot.data.data.timings.asr),
-                              Text(snapshot.data.data.timings.maghrib),
-                              Text(snapshot.data.data.timings.isha),
-                            ],
-                          ),
+      future: getPrayerTimeData(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: Color(0xFFFFFFFF),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: 24.0, right: 24.0, top: 104.0, bottom: 174),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 2,
+                    width: MediaQuery.of(context).size.width / 1.25,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF527D6E),
+                      borderRadius: BorderRadius.circular(20.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFF527D6E).withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Checkbox(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  value: this.valueFajr,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueFajr = value;
+                                    });
+                                  },
+                                ),
+                                Checkbox(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  value: this.valueDhuhr,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueDhuhr = value;
+                                    });
+                                  },
+                                ),
+                                Checkbox(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  value: this.valueAsr,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueAsr = value;
+                                    });
+                                  },
+                                ),
+                                Checkbox(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  value: this.valueMaghrib,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueMaghrib = value;
+                                    });
+                                  },
+                                ),
+                                Checkbox(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  value: this.valueIsha,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueIsha = value;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'Fajr',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                                Text(
+                                  'Dhuhr',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                                Text(
+                                  'Asr',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                                Text(
+                                  'Maghrib',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                                Text(
+                                  'Isha',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(snapshot.data.data.timings.fajr,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Color(0xFFFFFFFF),
+                                    )),
+                                Text(snapshot.data.data.timings.dhuhr,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Color(0xFFFFFFFF),
+                                    )),
+                                Text(snapshot.data.data.timings.asr,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Color(0xFFFFFFFF),
+                                    )),
+                                Text(snapshot.data.data.timings.maghrib,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Color(0xFFFFFFFF),
+                                    )),
+                                Text(snapshot.data.data.timings.isha,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Color(0xFFFFFFFF),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              );
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ));
+              ),
+            ],
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    ));
   }
 }
