@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../data.dart';
 import '../widgets/viewToggle.dart';
+import '../widgets/dailyView.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
