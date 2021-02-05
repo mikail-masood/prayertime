@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prayertimes/widgets/viewToggle.dart';
 import '../data.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -49,11 +50,18 @@ class _DailyViewState extends State<DailyView> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Container(
-              padding: const EdgeInsets.all(22.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 100.0,
+                    height: 50.0,
+                  ),
+                  Container(
+                    child: Text(city),
+                  ),
+                  Container(
+                    child: Text(
+                        '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}'),
                   ),
                   Container(
                       decoration: BoxDecoration(
@@ -153,6 +161,7 @@ class _DailyViewState extends State<DailyView> {
                           ),
                         ],
                       )),
+                  ViewToggle(),
                 ],
               ),
             );
