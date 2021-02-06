@@ -4,6 +4,9 @@ import '../data.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../main.dart';
 
 class DailyView extends StatefulWidget {
   @override
@@ -41,33 +44,57 @@ class _DailyViewState extends State<DailyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF527D6E),
-        elevation: 0.0,
-      ),
       body: FutureBuilder(
         future: getPrayerTimeData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Container(
-              padding: const EdgeInsets.all(8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 54.0),
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 50.0,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        city,
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                  Container(
-                    child: Text(city),
-                  ),
-                  Container(
-                    child: Text(
-                        '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 18.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
                   ),
                   Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Color(0xFF527D6E),
-                      ),
+                          borderRadius: BorderRadius.circular(20.0),
+                          gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [Color(0xFF232526), Color(0xFF414345)]),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset: Offset(0, 3),
+                            )
+                          ]),
                       padding: EdgeInsets.all(22.0),
                       child: Column(
                         children: <Widget>[
@@ -86,6 +113,7 @@ class _DailyViewState extends State<DailyView> {
                             onChanged: (bool value) {
                               setState(() {
                                 this.valueFajr = value;
+                                scheduleNotifs();
                               });
                             },
                           ),
@@ -171,5 +199,27 @@ class _DailyViewState extends State<DailyView> {
         },
       ),
     );
+  }
+
+  void scheduleNotifs() async {
+    var scheduledNotificationDateTime =
+        DateTime.now().add(Duration(seconds: 10));
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'alarm_notif',
+      'alarm_notif',
+      'Channel for Alarm notification',
+      icon: 'codex_logo',
+    );
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+        presentAlert: true, presentBadge: true, presentSound: true);
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.schedule(
+        0,
+        'Fajr Time',
+        'Good morning, its time to pray hoe',
+        scheduledNotificationDateTime,
+        platformChannelSpecifics);
   }
 }
