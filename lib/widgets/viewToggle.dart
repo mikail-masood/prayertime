@@ -17,11 +17,14 @@ class ViewToggle extends StatelessWidget {
               height: 75.0,
               width: 150.0,
               decoration: BoxDecoration(
-                color: Color(0xFF527D6E),
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [Color(0xFF232526), Color(0xFF414345)]),
                 borderRadius: BorderRadius.circular(20.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Color(0xFF527D6E).withOpacity(0.5),
+                    color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 4,
                     offset: Offset(0, 3),
@@ -45,11 +48,14 @@ class ViewToggle extends StatelessWidget {
               height: 75.0,
               width: 150.0,
               decoration: BoxDecoration(
-                color: Color(0xFF527D6E),
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [Color(0xFF232526), Color(0xFF414345)]),
                 borderRadius: BorderRadius.circular(20.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Color(0xFF527D6E).withOpacity(0.5),
+                    color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 4,
                     offset: Offset(0, 3),
