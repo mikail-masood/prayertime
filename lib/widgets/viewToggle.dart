@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/dailyView.dart';
+import '../screens/weeklyView.dart';
+import '../screens/monthlyView.dart';
 
 class ViewToggle extends StatelessWidget {
   @override
@@ -11,45 +12,57 @@ class ViewToggle extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(8.0),
-                height: 75.0,
-                width: 75.0,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF6F6F6),
-                  borderRadius: BorderRadius.circular(100.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                      offset: Offset(0, 3),
-                    )
-                  ],
-                ),
-                child: Icon(Icons.view_week)),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WeeklyView()));
+              },
+              child: Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(8.0),
+                  height: 75.0,
+                  width: 75.0,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF6F6F6),
+                    borderRadius: BorderRadius.circular(100.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: Offset(0, 3),
+                      )
+                    ],
+                  ),
+                  child: Icon(Icons.view_week)),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(8.0),
-                height: 75.0,
-                width: 75.0,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF6F6F6),
-                  borderRadius: BorderRadius.circular(100.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                      offset: Offset(0, 3),
-                    )
-                  ],
-                ),
-                child: Icon(Icons.calendar_today)),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MonthlyView()));
+              },
+              child: Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(8.0),
+                  height: 75.0,
+                  width: 75.0,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF6F6F6),
+                    borderRadius: BorderRadius.circular(100.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: Offset(0, 3),
+                      )
+                    ],
+                  ),
+                  child: Icon(Icons.calendar_today)),
+            ),
           ),
         ],
       ),
