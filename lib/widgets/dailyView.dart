@@ -44,49 +44,78 @@ class _DailyViewState extends State<DailyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFFF6F6F6),
+      ),
       body: FutureBuilder(
         future: getPrayerTimeData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 54.0),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Color(0xFFFFFFFF), Color(0xFFE1E1E1)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter)),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
+                    padding: const EdgeInsets.only(bottom: 18.0, top: 26.0),
                     child: Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        city,
-                        style: TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold,
+                        padding: EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          // gradient: LinearGradient(
+                          //     colors: [Color(0xFF4CB8C4), Color(0xFF3CD3AD)],
+                          //     begin: Alignment.centerLeft,
+                          //     end: Alignment.centerRight),
+                          color: Color(0xfff6f6f6),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset: Offset(0, 3),
+                            )
+                          ],
                         ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 18.0),
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 16.0),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  city,
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 18.0),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
                   ),
                   Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
-                          gradient: LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [Color(0xFF232526), Color(0xFF414345)]),
+                          color: Color(0xfff6f6f6),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
@@ -103,11 +132,11 @@ class _DailyViewState extends State<DailyView> {
                             activeColor: Colors.white,
                             secondary: Icon(
                               Icons.alarm_on,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             title: Text(
                               'Fajr at ${snapshot.data.data.timings.fajr}',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                             value: this.valueFajr,
                             onChanged: (bool value) {
@@ -122,11 +151,11 @@ class _DailyViewState extends State<DailyView> {
                             activeColor: Colors.white,
                             secondary: Icon(
                               Icons.alarm_on,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             title: Text(
                               'Dhuhr at ${snapshot.data.data.timings.dhuhr}',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                             value: this.valueDhuhr,
                             onChanged: (bool value) {
@@ -139,10 +168,10 @@ class _DailyViewState extends State<DailyView> {
                             checkColor: Color(0xFF527D6E),
                             activeColor: Colors.white,
                             secondary:
-                                Icon(Icons.alarm_on, color: Colors.white),
+                                Icon(Icons.alarm_on, color: Colors.black),
                             title: Text(
                               'Asr at ${snapshot.data.data.timings.asr}',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                             value: this.valueAsr,
                             onChanged: (bool value) {
@@ -155,11 +184,11 @@ class _DailyViewState extends State<DailyView> {
                             checkColor: Color(0xFF527D6E),
                             activeColor: Colors.white,
                             secondary:
-                                Icon(Icons.alarm_on, color: Colors.white),
+                                Icon(Icons.alarm_on, color: Colors.black),
                             title: Text(
                               'Maghrib at ${snapshot.data.data.timings.maghrib}',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                             ),
                             value: this.valueMaghrib,
@@ -174,12 +203,13 @@ class _DailyViewState extends State<DailyView> {
                             activeColor: Colors.white,
                             secondary: Icon(
                               Icons.alarm_on,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             title: Text(
-                              'Isha at ${snapshot.data.data.timings.isha}',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                                'Isha at ${snapshot.data.data.timings.isha}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                )),
                             value: this.valueIsha,
                             onChanged: (bool value) {
                               setState(() {
