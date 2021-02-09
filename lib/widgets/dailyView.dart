@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../main.dart';
+import '../screens/settings.dart';
 
 class DailyView extends StatefulWidget {
   @override
@@ -62,55 +63,63 @@ class _DailyViewState extends State<DailyView> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 26.0),
-                    child: Container(
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          // gradient: LinearGradient(
-                          //     colors: [Color(0xFF4CB8C4), Color(0xFF3CD3AD)],
-                          //     begin: Alignment.centerLeft,
-                          //     end: Alignment.centerRight),
-                          color: Color(0xfff6f6f6),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 4,
-                              offset: Offset(0, 3),
-                            )
-                          ],
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 16.0),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  city,
-                                  style: TextStyle(
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Settings()));
+                      },
+                      child: Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            // gradient: LinearGradient(
+                            //     colors: [Color(0xFF4CB8C4), Color(0xFF3CD3AD)],
+                            //     begin: Alignment.centerLeft,
+                            //     end: Alignment.centerRight),
+                            color: Color(0xfff6f6f6),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 4,
+                                offset: Offset(0, 3),
+                              )
+                            ],
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 16.0),
+                                child: Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    city,
+                                    style: TextStyle(
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 18.0),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 18.0),
+                                child: Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
-                        )),
+                              )
+                            ],
+                          )),
+                    ),
                   ),
                   Container(
                       decoration: BoxDecoration(
