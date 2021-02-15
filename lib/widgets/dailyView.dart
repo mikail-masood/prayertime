@@ -44,6 +44,8 @@ class _DailyViewState extends State<DailyView> {
   bool valueMaghrib = false;
   bool valueIsha = false;
 
+  // snapshot.data.data.timings.fajr
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,216 +53,219 @@ class _DailyViewState extends State<DailyView> {
         future: getPrayerTimeData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.green[800],
+            return SingleChildScrollView(
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green[800],
+                    ),
+                    height: MediaQuery.of(context).size.height / 2.5,
                   ),
-                  height: MediaQuery.of(context).size.height / 2.5,
-                ),
-                Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18.0, top: 54.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Settings()));
-                        },
+                  Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 18.0, top: 54.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Settings()));
+                          },
+                          child: Container(
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 16.0),
+                                    child: Container(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        '$city | $country',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 18.0),
+                                    child: Container(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}',
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 18.0),
+                                    child: Container(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Current prayer: Magrib',
+                                        style: TextStyle(
+                                          fontSize: 20.0,
+                                          color: Colors.yellow[600],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 18.0),
+                                    child: Container(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Upcoming prayer: Isha ',
+                                        style: TextStyle(
+                                          fontSize: 20.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 28.0),
                         child: Container(
-                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.0),
+                                color: Color(0xfff6f6f6),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 3),
+                                  )
+                                ]),
+                            padding: EdgeInsets.all(22.0),
                             child: Column(
                               children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8.0, horizontal: 16.0),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      '$city | $country',
-                                      style: TextStyle(
-                                          fontSize: 24.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
+                                CheckboxListTile(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  secondary: Icon(
+                                    Icons.alarm_on,
+                                    color: Colors.black,
                                   ),
+                                  title: Text(
+                                    'Fajr at ${snapshot.data.data.timings.fajr}',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  value: this.valueFajr,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueFajr = value;
+                                      scheduleNotifs();
+                                    });
+                                  },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8.0, horizontal: 18.0),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      '${snapshot.data.data.date.hijri.day} ${snapshot.data.data.date.hijri.month.en}, ${snapshot.data.data.date.hijri.year}',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                CheckboxListTile(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  secondary: Icon(
+                                    Icons.alarm_on,
+                                    color: Colors.black,
                                   ),
+                                  title: Text(
+                                    'Dhuhr at ${snapshot.data.data.timings.dhuhr}',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  value: this.valueDhuhr,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueDhuhr = value;
+                                    });
+                                  },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8.0, horizontal: 18.0),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      'Current prayer: Magrib',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.yellow[600],
-                                      ),
-                                    ),
+                                CheckboxListTile(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  secondary:
+                                      Icon(Icons.alarm_on, color: Colors.black),
+                                  title: Text(
+                                    'Asr at ${snapshot.data.data.timings.asr}',
+                                    style: TextStyle(color: Colors.black),
                                   ),
+                                  value: this.valueAsr,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueAsr = value;
+                                    });
+                                  },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8.0, horizontal: 18.0),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      'Upcoming prayer: Isha ',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.white,
-                                      ),
+                                CheckboxListTile(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  secondary:
+                                      Icon(Icons.alarm_on, color: Colors.black),
+                                  title: Text(
+                                    'Maghrib at ${snapshot.data.data.timings.maghrib}',
+                                    style: TextStyle(
+                                      color: Colors.black,
                                     ),
                                   ),
+                                  value: this.valueMaghrib,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueMaghrib = value;
+                                    });
+                                  },
+                                ),
+                                CheckboxListTile(
+                                  checkColor: Color(0xFF527D6E),
+                                  activeColor: Colors.white,
+                                  secondary: Icon(
+                                    Icons.alarm_on,
+                                    color: Colors.black,
+                                  ),
+                                  title: Text(
+                                      'Isha at ${snapshot.data.data.timings.isha}',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      )),
+                                  value: this.valueIsha,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this.valueIsha = value;
+                                    });
+                                  },
                                 ),
                               ],
                             )),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 28.0),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              color: Color(0xfff6f6f6),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 3),
-                                )
-                              ]),
-                          padding: EdgeInsets.all(22.0),
-                          child: Column(
-                            children: <Widget>[
-                              CheckboxListTile(
-                                checkColor: Color(0xFF527D6E),
-                                activeColor: Colors.white,
-                                secondary: Icon(
-                                  Icons.alarm_on,
-                                  color: Colors.black,
-                                ),
-                                title: Text(
-                                  'Fajr at ${snapshot.data.data.timings.fajr}',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                value: this.valueFajr,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    this.valueFajr = value;
-                                    scheduleNotifs();
-                                  });
-                                },
-                              ),
-                              CheckboxListTile(
-                                checkColor: Color(0xFF527D6E),
-                                activeColor: Colors.white,
-                                secondary: Icon(
-                                  Icons.alarm_on,
-                                  color: Colors.black,
-                                ),
-                                title: Text(
-                                  'Dhuhr at ${snapshot.data.data.timings.dhuhr}',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                value: this.valueDhuhr,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    this.valueDhuhr = value;
-                                  });
-                                },
-                              ),
-                              CheckboxListTile(
-                                checkColor: Color(0xFF527D6E),
-                                activeColor: Colors.white,
-                                secondary:
-                                    Icon(Icons.alarm_on, color: Colors.black),
-                                title: Text(
-                                  'Asr at ${snapshot.data.data.timings.asr}',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                value: this.valueAsr,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    this.valueAsr = value;
-                                  });
-                                },
-                              ),
-                              CheckboxListTile(
-                                checkColor: Color(0xFF527D6E),
-                                activeColor: Colors.white,
-                                secondary:
-                                    Icon(Icons.alarm_on, color: Colors.black),
-                                title: Text(
-                                  'Maghrib at ${snapshot.data.data.timings.maghrib}',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                value: this.valueMaghrib,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    this.valueMaghrib = value;
-                                  });
-                                },
-                              ),
-                              CheckboxListTile(
-                                checkColor: Color(0xFF527D6E),
-                                activeColor: Colors.white,
-                                secondary: Icon(
-                                  Icons.alarm_on,
-                                  color: Colors.black,
-                                ),
-                                title: Text(
-                                    'Isha at ${snapshot.data.data.timings.isha}',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    )),
-                                value: this.valueIsha,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    this.valueIsha = value;
-                                  });
-                                },
-                              ),
-                            ],
-                          )),
-                    ),
-                    ViewToggle(),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) => Colors.white)),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LocationSelector()));
-                      },
-                      child: null,
-                    ),
-                  ],
-                ),
-              ],
+                      ViewToggle(),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) =>
+                                        Colors.white)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LocationSelector()));
+                        },
+                        child: null,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             );
           } else {
             return Center(child: CircularProgressIndicator());
