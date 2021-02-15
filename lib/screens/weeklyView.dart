@@ -6,6 +6,31 @@ class WeeklyView extends StatefulWidget {
 }
 
 class _WeeklyViewState extends State<WeeklyView> {
+  List<dropDownItem> _items = generateItems(5);
+
+  Widget _buildListPanel() {
+    return ExpansionPanelList(
+      expansionCallback: (int index, bool isExpanded) {
+        setState(() {
+          _items[index].isExpanded = !isExpanded;
+        });
+      },
+      children: _items.map<ExpansionPanel>((dropDownItem item) {
+        return ExpansionPanel(
+            canTapOnHeader: true,
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                title: Text(item.headerValue),
+              );
+            },
+            body: ListTile(
+              title: Text(item.expandedValue),
+            ),
+            isExpanded: item.isExpanded);
+      }).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,9 +42,28 @@ class _WeeklyViewState extends State<WeeklyView> {
         ),
         backgroundColor: Colors.white,
       ),
-      body: Container(
-        color: Colors.green[900],
+      body: SingleChildScrollView(
+        child: Container(
+          child: _buildListPanel(),
+        ),
       ),
     );
   }
+}
+
+class dropDownItem {
+  String expandedValue;
+  String headerValue;
+  bool isExpanded;
+
+  dropDownItem({this.expandedValue, this.headerValue, this.isExpanded = false});
+}
+
+List<dropDownItem> generateItems(int numberOfItems) {
+  return List.generate(numberOfItems, (index) {
+    return dropDownItem(
+      headerValue: 'Panel $index',
+      expandedValue: 'this is item $index',
+    );
+  });
 }
