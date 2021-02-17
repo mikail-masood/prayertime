@@ -6,7 +6,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
 import '../main.dart';
 import '../screens/settings.dart';
 import '../widgets/locationSelector.dart';
@@ -58,7 +57,15 @@ class _DailyViewState extends State<DailyView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
                       color: Colors.green[800],
+                    ),
+                    height: MediaQuery.of(context).size.height / 2.5,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Colors.black.withOpacity(0.3),
                     ),
                     height: MediaQuery.of(context).size.height / 2.5,
                   ),
@@ -76,10 +83,11 @@ class _DailyViewState extends State<DailyView> {
                           child: Container(
                               padding: EdgeInsets.all(8.0),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0, horizontal: 16.0),
+                                        vertical: 4.0, horizontal: 16.0),
                                     child: Container(
                                       alignment: Alignment.topLeft,
                                       child: Text(
@@ -93,7 +101,7 @@ class _DailyViewState extends State<DailyView> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0, horizontal: 18.0),
+                                        vertical: 4.0, horizontal: 18.0),
                                     child: Container(
                                       alignment: Alignment.topLeft,
                                       child: Text(
@@ -107,11 +115,11 @@ class _DailyViewState extends State<DailyView> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0, horizontal: 18.0),
+                                        vertical: 4.0, horizontal: 18.0),
                                     child: Container(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        'Current prayer: Magrib',
+                                        'Magrib',
                                         style: TextStyle(
                                           fontSize: 20.0,
                                           color: Colors.yellow[600],
@@ -121,11 +129,11 @@ class _DailyViewState extends State<DailyView> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0, horizontal: 18.0),
+                                        vertical: 4.0, horizontal: 18.0),
                                     child: Container(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        'Upcoming prayer: Isha ',
+                                        'Next: Isha',
                                         style: TextStyle(
                                           fontSize: 20.0,
                                           color: Colors.white,
@@ -142,7 +150,7 @@ class _DailyViewState extends State<DailyView> {
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
-                                color: Color(0xfff6f6f6),
+                                color: Color(0xfff6f6f6).withOpacity(0.9),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.5),
