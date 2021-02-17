@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prayertimes/screens/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/locationSelector.dart';
 import '../widgets/dailyView.dart';
@@ -9,7 +10,7 @@ class Wrapper extends StatelessWidget {
     if (getLocationData().toString == null) {
       return LocationSelector();
     } else {
-      return DailyView();
+      return HomePage();
     }
   }
 
