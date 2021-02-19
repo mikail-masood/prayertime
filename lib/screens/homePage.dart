@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: EdgeInsets.only(bottom: 28.0),
           child: Container(
-            height: 200,
+            height: 235,
             decoration: BoxDecoration(
               color: Color(0xFF3C4982),
               borderRadius: BorderRadius.only(
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 12.0,
+                height: 18.0,
               ),
               //dhuhr
               Container(
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 12.0,
+                height: 18.0,
               ),
               //asr
               Container(
@@ -215,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 12.0,
+                height: 18.0,
               ),
               //maghrib
               Container(
@@ -267,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 12.0,
+                height: 18.0,
               ),
               //isha
               Container(
