@@ -114,9 +114,15 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
                             'Fajr',
                             style: TextStyle(fontSize: 18.0),
+                          ),
+                          SizedBox(
+                            width: 195,
                           ),
                           Text(
                             '5:55am',
@@ -157,9 +163,17 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
                             'Dhuhr',
-                            style: TextStyle(fontSize: 18.0),
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 175,
                           ),
                           Text(
                             '12:32pm',
@@ -193,16 +207,22 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.wb_sunny),
+                      child: Icon(Icons.star_rate_outlined),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
                             'Asr',
                             style: TextStyle(fontSize: 18.0),
+                          ),
+                          SizedBox(
+                            width: 200,
                           ),
                           Text(
                             '3:30pm',
@@ -237,7 +257,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(
-                        Icons.wb_sunny,
+                        Icons.nights_stay_rounded,
                         color: Color(0xFFF5F5F5),
                       ),
                     ),
@@ -246,12 +266,18 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
                             'Maghrib',
                             style: TextStyle(
                               fontSize: 18.0,
                               color: Color(0xffF5F5F5),
                             ),
+                          ),
+                          SizedBox(
+                            width: 160,
                           ),
                           Text(
                             '5:50pm',
@@ -288,16 +314,22 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.wb_sunny),
+                      child: Icon(Icons.nights_stay),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
                             'Isha',
                             style: TextStyle(fontSize: 18.0),
+                          ),
+                          SizedBox(
+                            width: 195,
                           ),
                           Text(
                             '7:12pm',
