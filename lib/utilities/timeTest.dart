@@ -8,23 +8,27 @@ class TimeTest extends StatefulWidget {
 }
 
 class _TimeTestState extends State<TimeTest> {
+  Future<PrayerTimesResult> futureTimes;
   final prayerService = PrayerTimeService();
 
   @override
   void initState() {
     super.initState();
+    futureTimes = prayerService.getPrayerTimes();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FutureBuilder<List<PrayerTimes>>(
-          future: prayerService.getPrayerTimes(),
+        child: FutureBuilder<PrayerTimesResult>(
+          future: futureTimes,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              print(snapshot.data);
-            } else {
+              print(snapshot.data.prayerTimes.dateAndTime.dailyTimes.fajr);
+            } else if (snapshot.hasData) {
+              print('snapshot has data');
+            } else if (snapshot.hasError) {
               print('snapshot error');
             }
             return CircularProgressIndicator();
