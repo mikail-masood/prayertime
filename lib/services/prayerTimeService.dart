@@ -5,13 +5,13 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class PrayerTimeService {
-  Future<List<PrayerTimes>> getPrayerTimes() async {
+  Future<PrayerTimesResult> getPrayerTimes() async {
     var response = await http.get(
-        'https://api.prayer.zone/v2/Timess/today.json?city=toronto&school=0');
-    var json = convert.jsonDecode(response.body);
-    var jsonResults = json['results'] as List;
-    return jsonResults
-        .map((prayertimes) => PrayerTimes.fromJson(prayertimes))
-        .toList();
+        'https://api.prayer.zone/v2/times/today.json?city=toronto&school=0&key=MagicKey');
+    if (response.statusCode == 200) {
+      return PrayerTimesResult.fromJson(convert.jsonDecode(response.body));
+    } else {
+      throw Exception('failed');
+    }
   }
 }
