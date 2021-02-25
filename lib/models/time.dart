@@ -3,6 +3,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
+class PrayerTimesResult {
+  final PrayerTimes prayerTimes;
+
+  PrayerTimesResult({this.prayerTimes});
+
+  factory PrayerTimesResult.fromJson(Map<String, dynamic> json) {
+    return PrayerTimesResult(
+        prayerTimes: PrayerTimes.fromJson(json['results']));
+  }
+}
+
 class PrayerTimes {
   final DateAndTime dateAndTime;
 
