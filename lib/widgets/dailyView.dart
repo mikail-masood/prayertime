@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prayertimes/widgets/viewToggle.dart';
-import '../data.dart';
+import '../models/data.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -22,7 +22,7 @@ class _DailyViewState extends State<DailyView> {
   static int method = 1;
 
   final String url =
-      'http://api.aladhan.com/v2/timingsByCity?city=$city&country=$country&method=$method';
+      'http://api.aladhan.com/v1/timingsByCity?city=$city&country=$country&method=$method';
 
   Future getPrayerTimeData() async {
     http.Response res = await http.get(Uri.encodeFull(url), headers: {
