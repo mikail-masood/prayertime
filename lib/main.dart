@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './widgets/dailyView.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:async';
-import './widgets/wrapper.dart';
+import 'utilities/wrapper.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
